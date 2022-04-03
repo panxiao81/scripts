@@ -13,6 +13,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+IP="172.16.100.201"
 
 Check_root() {
     if [[ $(id -u) -ne 0 ]]; then
@@ -35,10 +36,10 @@ Help() {
 Monitoring() {
     Check_root
     while true; do
-        curl --connection-timeout 5 --fail -L 172.16.100.201
-        if [ $? ! -eq 0 ]; then
+        curl --connection-timeout 5 --fail -L $IP
+        if [ $? -ne 0 ]; then
             for i in $(seq 3); do
-                curl --connection-timeout 5 --fail -L 172.16.100.201
+                curl --connection-timeout 5 --fail -L $IP
                 if [ $? -eq 0 ]; then
                     continue 2
                 fi
