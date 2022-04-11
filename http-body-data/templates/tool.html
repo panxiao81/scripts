@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Body Data Tools</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 0.5rem;
+        align-items: center;
+      }
+      table {
+        border-collapse: collapse;
+        width: 90%;
+        margin: 1em;
+      }
+      table tr td {
+        border: 2px solid;
+      }
+      tr td {
+        padding: 1rem;
+      }
+      td {
+        text-align: center;
+      }
+      th {
+        background-color: greenyellow;
+        border: 2px solid;
+      }
+      button {
+        display: block;
+        padding: 0.5rem 1rem;
+        background-color: #007bff;
+        color: white;
+        margin: 1em;
+        border-radius: 0.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Body Data Tools</h1>
+      <p>User-Agent: {{ .UA }}</p>
+      <p>Method: {{ .Method }}</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range $key, $value := .Arg }}
+          <tr>
+            <td>{{ $key }}</td>
+            <td>{{ $value }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+      <button onclick="history.back()">Go Back</button>
+    </div>
+  </body>
+</html>
