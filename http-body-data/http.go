@@ -6,7 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"strings"
+	"net/url"
 )
 
 //go:embed templates
@@ -15,7 +15,7 @@ var indexHTML embed.FS
 type tools struct {
 	UA     string
 	Method string
-	Arg    map[string]string
+	Arg    url.Values
 }
 
 func enableCors(w *http.ResponseWriter) {
@@ -38,12 +38,10 @@ func getFormData(r *http.Request) (*tools, error) {
 		return nil, err
 	}
 	tmplData := new(tools)
-	tmplData.Arg = make(map[string]string)
+	tmplData.Arg = make(url.Values)
 	tmplData.UA = r.UserAgent()
 	tmplData.Method = r.Method
-	for k, v := range r.Form {
-		tmplData.Arg[k] = strings.Join(v, "")
-	}
+	tmplData.Arg = r.Form
 	return tmplData, nil
 }
 

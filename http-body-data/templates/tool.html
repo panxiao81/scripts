@@ -42,6 +42,10 @@
         margin: 1em;
         border-radius: 0.25rem;
       }
+
+      ul li {
+        list-style-position: inside;
+      }
     </style>
   </head>
   <body>
@@ -60,7 +64,13 @@
           {{ range $key, $value := .Arg }}
           <tr>
             <td>{{ $key }}</td>
-            <td>{{ $value }}</td>
+            <td>
+              <ul>
+                {{ range $val := $value }}
+                <li>{{ $val }}</li>
+                {{ end }}
+              </ul>
+            </td>
           </tr>
           {{ end }}
         </tbody>
